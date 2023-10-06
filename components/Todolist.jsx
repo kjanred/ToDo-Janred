@@ -14,25 +14,25 @@ import {
     import { deleteTodo, toggleTodoStatus } from "../api/todo";
     const TodoList = () => {
     const [todos, setTodos] = React.useState([]);
-    const {  user } = useAuth();
+    const { user } = useAuth();
     const toast = useToast();
-    const refreshData = () => {
-    if (!user) {
-    setTodos([]);
-    return;
-    }
-    const q = query(collection(db, "todo"), where("user", "==", user.uid));
-    onSnapshot(q, (querySnapchot) => {
-    let ar = [];
-    querySnapchot.docs.forEach((doc) => {
-    ar.push({ id: doc.id, ...doc.data() });
-    });
-    setTodos(ar);
-    });
-    };
+    
     useEffect(() => {
-    refreshData();
-    }, [user]);
+        const refreshData = () => {
+            if (!user) {
+            setTodos([]);
+            return;
+            }
+            const q = query(collection(db, "todo"), where("user", "==", user.uid));
+            onSnapshot(q, (querySnapchot) => {
+            let ar = [];
+            querySnapchot.docs.forEach((doc) => {
+            ar.push({ id: doc.id, ...doc.data() });
+            });
+            setTodos(ar);
+            });
+            };
+    refreshData();}, [user]);
     const handleTodoDelete = async (id) => {
     if (confirm("Are you sure you wanna delete this todo?")) {
     deleteTodo(id);
