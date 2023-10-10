@@ -71,7 +71,7 @@ Completed ✅
 <Button
 onClick={() => handleTodoCreate()}
 disabled={title.length < 1 || description.length < 1 || isLoading}
-variantColor="teal"
+colorScheme="teal"
 variant="solid"
 >
 Add
