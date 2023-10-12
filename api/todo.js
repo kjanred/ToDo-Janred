@@ -7,6 +7,7 @@ doc,
 deleteDoc,
 } from "firebase/firestore";
 const addTodo = async ({ userId, title, description, status }) => {
+    console.log("anything");
 try {
 await addDoc(collection(db, "todo"), {
 user: userId,
@@ -15,7 +16,11 @@ description: description,
 status: status,
 createdAt: new Date().getTime(),
 });
-} catch (err) {}
+console.log("Document written with ID: ", docRef.id);
+} catch (err) {
+    console.log("testing");
+}
+
 };
 const toggleTodoStatus = async ({ docId, status }) => {
 try {
