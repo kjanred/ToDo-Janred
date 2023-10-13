@@ -95,9 +95,14 @@ body {
     rgb(var(--background-start-rgb));
 }
 
-a {
-  color: inherit;
+a:active, a:visited, a:link {
+  color: rgb(35, 99, 209);
   text-decoration: none;
+}
+
+a:hover {
+  color: rgb(131, 169, 233);
+  text-decoration: underline;
 }
 
 @media (prefers-color-scheme: dark) {

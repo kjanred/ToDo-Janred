@@ -49,8 +49,11 @@ import {
     });
     };
     return (
+    <Box maxW="50%">
+
+    <Heading size="sm">To Do List:</Heading>
     <Box mt={5}>
-    <SimpleGrid columns={{ base: 1, md: 3 }} spacing={8}>
+    <SimpleGrid columns={1} spacing={8}>
     {todos &&
     todos.map((todo) => (
     <Box
@@ -103,6 +106,8 @@ import {
     </Box>
     ))}
     </SimpleGrid>
+    </Box>
+    
     </Box>
     );
     };

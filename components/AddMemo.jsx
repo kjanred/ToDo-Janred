@@ -54,7 +54,7 @@ placeholder="Description"
 value={description}
 onChange={(e) => setDescription(e.target.value)}
 />
-<Select value={urgency} onChange={(e) => setStatus(e.target.value)}>
+<Select value={urgency} onChange={(e) => setUrgency(e.target.value)}>
 <option
 value={"normal"}
 style={{ color: "yellow", fontWeight: "bold" }}

@@ -11,8 +11,8 @@ import {
     import useAuth from "../hooks/useAuth";
     import { collection, onSnapshot, query, where } from "firebase/firestore";
     import { db } from "../firebase";
-    import { FaToggleOff, FaToggleOn, FaTrash } from "react-icons/fa";
-    import { deleteMemo, toggleMemoStatus } from "../api/memo";
+    import { FaTrash } from "react-icons/fa";
+    import { deleteMemo, toggleMemoUrgency } from "../api/memo";
     const MemoList = () => {
     const [memos, setMemos] = React.useState([]);
     const { user } = useAuth();
@@ -40,17 +40,12 @@ import {
     toast({ title: "Memo deleted successfully", status: "success" });
     }
     };
-    const handleToggle = async (id, status) => {
-    const newStatus = status == "completed" ? "pending" : "completed";
-    await toggleMemoStatus({ docId: id, status: newStatus });
-    toast({
-    title: `Memo marked ${newStatus}`,
-    status: newStatus == "completed" ? "success" : "warning",
-    });
-    };
+ 
     return (
+    <Box maxW="50%">
+    <Heading size="sm">Memo List:</Heading>
     <Box mt={5}>
-    <SimpleGrid columns={{ base: 1, md: 3 }} spacing={8}>
+    <SimpleGrid columns={1} spacing={8}>
     {memos &&
     memos.map((memo) => (
     <Box
@@ -62,7 +57,7 @@ import {
     _hover={{ boxShadow: "sm" }}
     >
     <Heading as="h3" fontSize={"xl"}>
-    {memo.title}{" "}
+    <Link key={memo.id} href={`/memo/${memo.id}`}>{memo.title}</Link>{" "}
     <Badge
     color="red.500"
     bg="inherit"
@@ -77,20 +72,7 @@ import {
     >
     <FaTrash />
     </Badge>
-    <Badge
-    color={memo.status == "pending" ? "gray.500" : "green.500"}
-    bg="inherit"
-    transition={"0.2s"}
-    _hover={{
-    bg: "inherit",
-    transform: "scale(1.2)",
-    }}
-    float="right"
-    size="xs"
-    onClick={() => handleToggle(memo.id, memo.urgency)}
-    >
-    {memo.urgency == "normal" ? <FaToggleOff /> : <FaToggleOn />}
-    </Badge>
+    
     <Badge
     float="right"
     opacity="0.8"
@@ -103,6 +85,7 @@ import {
     </Box>
     ))}
     </SimpleGrid>
+    </Box>
     </Box>
     );
     };

@@ -14,7 +14,7 @@ import {
 } from "firebase/firestore";
 import { db } from "../../firebase";
 
-const TodoItem = ({itemData}) => {
+const MemoItem = ({itemData}) => {
     const { user } = useAuth() || {};
     if (!user) {
         return;
@@ -24,7 +24,7 @@ const TodoItem = ({itemData}) => {
 
         <Container maxW="7xl">
 <Auth />
-<Heading size="xs"><Link href="../">back to home</Link></Heading>
+<Heading><Link href="../">back to home</Link></Heading>
 <Box mt={5}>
             <Heading as="h3" fontSize={"xl"}>
                 { itemData.title }
@@ -33,7 +33,7 @@ const TodoItem = ({itemData}) => {
                 { itemData.description }
             </Text>
             <Text>
-                { itemData.staus }
+                { itemData.urgency }
             </Text>
             <Text>
                 { itemData.createdAt }
@@ -46,7 +46,7 @@ const TodoItem = ({itemData}) => {
 
 export async function getServerSideProps(stuff) {
     let itemData = null;
-    const docRef = doc( db, "todo", stuff.params.id)
+    const docRef = doc( db, "memo", stuff.params.id)
     const docSnap = await getDoc(docRef);
     if (docSnap.exists() ) {
     itemData = docSnap.data();
@@ -59,4 +59,4 @@ export async function getServerSideProps(stuff) {
     };
 }
 
-export default TodoItem;
+export default MemoItem;
