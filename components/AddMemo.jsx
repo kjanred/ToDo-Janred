@@ -56,10 +56,10 @@ onChange={(e) => setDescription(e.target.value)}
 />
 <Select value={urgency} onChange={(e) => setUrgency(e.target.value)}>
 <option
-value={"normal"}
+value={"notUrgent"}
 style={{ color: "green", fontWeight: "bold" }}
 >
-Normal
+Not Urgent
 </option>
 <option
 value={"urgent"}

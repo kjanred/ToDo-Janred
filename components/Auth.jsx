@@ -30,9 +30,9 @@ const credential = GoogleAuthProvider.credentialFromError(error);
 });
 };
 return (
-<Box display="flex" alignItems="center" justifyContent="space-between">
+<Box mt={5} display="flex" alignItems="center" justifyContent="space-between">
     <Box>
-        <Link href="/add-todo">Add ToDo</Link>
+        <Link href="/add-todo">Add To Do</Link>
     </Box>
     <Box>
         <Link href="/add-memo">Add Memo</Link>

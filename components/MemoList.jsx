@@ -12,7 +12,7 @@ import {
     import { collection, onSnapshot, query, where } from "firebase/firestore";
     import { db } from "../firebase";
     import { FaTrash } from "react-icons/fa";
-    import { deleteMemo, toggleMemoUrgency } from "../api/memo";
+    import { deleteMemo } from "../api/memo";
     const MemoList = () => {
     const [memos, setMemos] = React.useState([]);
     const { user } = useAuth();
@@ -76,7 +76,7 @@ import {
     <Badge
     float="right"
     opacity="0.8"
-    bg={memo.urgency == "normal" ? "green.500" : memo.urgency == "urgent" ? "yellow.500" : "red.500"}
+    bg={memo.urgency == "notUrgent" ? "green.500" : memo.urgency == "urgent" ? "yellow.500" : "red.500"}
     >
     {memo.urgency}
     </Badge>
