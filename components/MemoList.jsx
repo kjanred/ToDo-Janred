@@ -76,7 +76,7 @@ import {
     <Badge
     float="right"
     opacity="0.8"
-    bg={memo.urgency == "urgent" ? "yellow.500" : "green.500"}
+    bg={memo.urgency == "normal" ? "green.500" : memo.urgency == "urgent" ? "yellow.500" : "red.500"}
     >
     {memo.urgency}
     </Badge>

@@ -25,18 +25,19 @@ const TodoItem = ({itemData}) => {
         <Container maxW="7xl">
 <Auth />
 <Heading size="xs"><Link href="../">back to home</Link></Heading>
-<Box mt={5}>
-            <Heading as="h3" fontSize={"xl"}>
+<Heading fontFamily={'"Century Gothic", sans-serif'} letterSpacing={'5px'} textTransform={'uppercase'} textAlign={'center'} fontWeight={'normal'}>To Do</Heading>
+<Box p={5} mt={5} bg='#f0f0f0'>
+            <Heading as="h1" fontSize={"3xl"}>
                 { itemData.title }
             </Heading>
-            <Text>
-                { itemData.description }
+            <Text fontSize={"lg"}>
+             Description: <span className="listInfo">{ itemData.description }</span>
             </Text>
-            <Text>
-                { itemData.staus }
+            <Text fontSize={"sm"}>
+              Status:  <span className="listInfo">{ itemData.status }</span>
             </Text>
-            <Text>
-                { itemData.createdAt }
+            <Text fontSize={"sm"}>
+              Created:  <span className="listInfo">{ itemData.createdAt }</span>
             </Text>
 
         </Box>
