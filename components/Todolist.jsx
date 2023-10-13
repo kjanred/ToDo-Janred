@@ -6,6 +6,7 @@ import {
     Text,
     useToast,
     } from "@chakra-ui/react";
+    import Link from "next/link";
     import React, { useEffect } from "react";
     import useAuth from "../hooks/useAuth";
     import { collection, onSnapshot, query, where } from "firebase/firestore";
@@ -61,7 +62,7 @@ import {
     _hover={{ boxShadow: "sm" }}
     >
     <Heading as="h3" fontSize={"xl"}>
-    {todo.title}{" "}
+    <Link key={todo.id} href={`/todo/${todo.id}`}>{todo.title}</Link>{" "}
     <Badge
     color="red.500"
     bg="inherit"

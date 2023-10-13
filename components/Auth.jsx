@@ -30,23 +30,33 @@ const credential = GoogleAuthProvider.credentialFromError(error);
 });
 };
 return (
-<Box position={"fixed"} top="5%" right="5%">
-<Button onClick={() => toggleColorMode()}>
-{colorMode == "dark" ? <FaSun /> : <FaMoon />}
-</Button>{" "}
-{isLoggedIn && (
-<>
-<Text color="green.500">{user.email}</Text>
-<Link color="red.500" onClick={() => auth.signOut()}>
-Logout
-</Link>
-</>
-)}
-{!isLoggedIn && (
-<Button leftIcon={<FaGoogle />} onClick={() => handleAuth()}>
-Login with Google
-</Button>
-)}
+<Box display="flex" alignItems="center" justifyContent="space-between">
+    <Box>
+        <Link href="/add-todo">Add ToDo</Link>
+    </Box>
+    <Box>
+        <Link href="/">
+            Home List
+        </Link>
+    </Box>
+    <Box>
+    <Button onClick={() => toggleColorMode()}>
+    {colorMode == "dark" ? <FaSun /> : <FaMoon />}
+    </Button>{" "}
+    {isLoggedIn && (
+    <>
+    <Text color="green.500">{user.email}</Text>
+    <Link color="red.500" onClick={() => auth.signOut()}>
+    Logout
+    </Link>
+    </>
+    )}
+    {!isLoggedIn && (
+    <Button leftIcon={<FaGoogle />} onClick={() => handleAuth()}>
+    Login with Google
+    </Button>
+    )}
+    </Box>
 </Box>
 );
 };
