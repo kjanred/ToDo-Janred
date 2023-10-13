@@ -12,7 +12,7 @@ import {
     import { collection, onSnapshot, query, where } from "firebase/firestore";
     import { db } from "../firebase";
     import { FaTrash } from "react-icons/fa";
-    import { deleteMemo } from "../api/memo";
+    import { deleteMemo, toggleMemoUrgency } from "../api/memo";
     const MemoList = () => {
     const [memos, setMemos] = React.useState([]);
     const { user } = useAuth();
@@ -40,6 +40,18 @@ import {
     toast({ title: "Memo deleted successfully", status: "success" });
     }
     };
+
+    //{memo.urgency == "notUrgent" ? "green.500" : memo.urgency == "urgent" ? "yellow.500" : "red.500"}
+
+    const handleToggle = async (id, urgency) => {
+        const newUrgency = urgency == "notUrgent" ? "urgent" : urgency == "urgent" ? "asap" : "notUrgent";
+
+        await toggleMemoUrgency({ docId: id, urgency: newUrgency });
+        toast({
+        title: `Memo marked ${newUrgency}`,
+        status: newUrgency == "notUrgent" ? "success" : newUrgency == "urgent" ? "warning" : "error"
+        });
+        };
  
     return (
     <Box maxW="50%">
@@ -77,6 +89,7 @@ import {
     float="right"
     opacity="0.8"
     bg={memo.urgency == "notUrgent" ? "green.500" : memo.urgency == "urgent" ? "yellow.500" : "red.500"}
+    onClick={() => handleToggle(memo.id, memo.urgency)}
     >
     {memo.urgency}
     </Badge>
