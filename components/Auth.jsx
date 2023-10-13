@@ -35,6 +35,9 @@ return (
         <Link href="/add-todo">Add ToDo</Link>
     </Box>
     <Box>
+        <Link href="/add-memo">Add Memo</Link>
+    </Box>
+    <Box>
         <Link href="/">
             Home List
         </Link>
