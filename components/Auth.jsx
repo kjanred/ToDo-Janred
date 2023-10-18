@@ -38,6 +38,9 @@ return (
         <Link href="/add-memo">Add Memo</Link>
     </Box>
     <Box>
+        <Link href="/add-contact">Add Contact</Link>
+    </Box>
+    <Box>
         <Link href="/">
             Home List
         </Link>
