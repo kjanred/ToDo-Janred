@@ -49,7 +49,7 @@ import {
     });
     };
     return (
-    <Box maxW="50%">
+    <Box maxW="90%" m={1}>
 
     <Heading size="sm">To Do List:</Heading>
     <Box mt={5}>

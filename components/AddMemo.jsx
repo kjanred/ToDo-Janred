@@ -7,6 +7,7 @@ Textarea,
 Stack,
 Select,
 useToast,
+Heading
 } from "@chakra-ui/react";
 import useAuth from "../hooks/useAuth";
 import { addMemo } from "../api/memo";
@@ -42,7 +43,9 @@ setUrgency("pending");
 toast({ title: "Memo created successfully", status: "success" });
 };
 return (
-<Box w="40%" margin={"0 auto"} display="block" mt={5}>
+<Box w="50%">
+<Heading size="sm">Add Memo:</Heading>
+<Box margin={"0 auto"} display="block" mt={5}>
 <Stack direction="column">
 <Input
 placeholder="Title"
@@ -83,6 +86,7 @@ variant="solid"
 Add
 </Button>
 </Stack>
+</Box>
 </Box>
 );
 };

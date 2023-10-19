@@ -7,6 +7,7 @@ Textarea,
 Stack,
 Select,
 useToast,
+Heading
 } from "@chakra-ui/react";
 import useAuth from "../hooks/useAuth";
 import { addTodo } from "../api/todo";
@@ -42,7 +43,9 @@ setStatus("pending");
 toast({ title: "Todo created successfully", status: "success" });
 };
 return (
-<Box w="40%" margin={"0 auto"} display="block" mt={5}>
+<Box w="50%">
+<Heading size="sm">Add To Do:</Heading>
+<Box margin={"0 auto"} display="block" mt={5}>
 <Stack direction="column">
 <Input
 placeholder="Title"
@@ -77,6 +80,7 @@ variant="solid"
 Add
 </Button>
 </Stack>
+</Box>
 </Box>
 );
 };

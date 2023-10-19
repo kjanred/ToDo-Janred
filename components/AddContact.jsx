@@ -5,8 +5,8 @@ Input,
 Button,
 Textarea,
 Stack,
-Select,
 useToast,
+Heading
 } from "@chakra-ui/react";
 import useAuth from "../hooks/useAuth";
 import { addContact } from "../api/contact";
@@ -19,7 +19,7 @@ const [notes, setNotes] = React.useState("");
 const [isLoading, setIsLoading] = React.useState(false);
 const toast = useToast();
 const { isLoggedIn, user } = useAuth();
-const handleMemoCreate = async () => {
+const handleContactCreate = async () => {
 if (!isLoggedIn) {
 toast({
 title: "You must be logged in to create a memo",
@@ -48,7 +48,9 @@ setNotes("");
 toast({ title: "Contact created successfully", status: "success" });
 };
 return (
-<Box w="40%" margin={"0 auto"} display="block" mt={5}>
+<Box w="50%">
+<Heading size="sm">Add Contact:</Heading>
+<Box margin={"0 auto"} display="block" mt={5}>
 <Stack direction="column">
 <Input
 placeholder="Name"
@@ -72,7 +74,7 @@ onChange={(e) => setEmail(e.target.value)}
 />
 
 <Button
-onClick={() => handleMemoCreate()}
+onClick={() => handleContactCreate()}
 disabled={name.length < 1 || phoneNumber.length < 1 || isLoading}
 colorScheme="teal"
 variant="solid"
@@ -80,6 +82,7 @@ variant="solid"
 Add
 </Button>
 </Stack>
+</Box>
 </Box>
 );
 };
