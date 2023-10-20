@@ -6,10 +6,10 @@ updateDoc,
 doc,
 deleteDoc,
 } from "firebase/firestore";
-const addMemo = async ({ userId, title, description, urgency }) => {
+const addEvent = async ({ userId, title, description, urgency }) => {
     console.log("anything");
 try {
-await addDoc(collection(db, "memo"), {
+await addDoc(collection(db, "event"), {
 user: userId,
 title: title,
 description: description,
@@ -22,9 +22,9 @@ console.log("Document written with ID: ", docRef.id);
 }
 
 };
-const toggleMemoUrgency = async ({ docId, urgency }) => {
+const toggleEventUrgency = async ({ docId, urgency }) => {
 try {
-const todoRef = doc(db, "memo", docId);
+const todoRef = doc(db, "event", docId);
 await updateDoc(todoRef, {
 urgency,
 });
@@ -32,12 +32,12 @@ urgency,
 console.log(err);
 }
 };
-const deleteMemo = async (docId) => {
+const deleteEvent = async (docId) => {
 try {
-const todoRef = doc(db, "memo", docId);
+const todoRef = doc(db, "event", docId);
 await deleteDoc(todoRef);
 } catch (err) {
 console.log(err);
 }
 };
-export { addMemo, toggleMemoUrgency, deleteMemo };
+export { addEvent, toggleEventUrgency, deleteEvent };

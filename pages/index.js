@@ -5,13 +5,19 @@ import { SimpleGrid,
          TabList, 
          TabPanels, 
          Tab, 
-         TabPanel } from "@chakra-ui/react";
+         TabPanel,
+         Accordion,
+         AccordionItem,
+         AccordionButton,
+         AccordionPanel,
+         AccordionIcon,
+        Heading } from "@chakra-ui/react";
 import Auth from "../components/Auth";
 import TodoList from "../components/TodoList";
-import MemoList from "../components/MemoList";
+import EventList from "../components/EventList";
 import ContactList from "../components/ContactList";
 import AddTodo from "@/components/AddTodo";
-import AddMemo from "@/components/AddMemo";
+import AddEvent from "@/components/AddEvent";
 import AddContact from "@/components/Addcontact";
 
 
@@ -22,23 +28,73 @@ return (
 <Tabs>
   <TabList>
     <Tab>To Dos</Tab>
-    <Tab>Memos</Tab>
+    <Tab>Events</Tab>
     <Tab>Contacts</Tab>
   </TabList>
-
   <TabPanels>
+
     <TabPanel>
-    <SimpleGrid columns={2} alignContent="center">
+    <Accordion hideFrom='md'my={1} defaultIndex={[0]} allowMultiple>
+  <AccordionItem>
+    <h2>
+      <AccordionButton px='0'>
+        <Box as="span" flex='1' textAlign='left'>
+          <Heading size='sm' p='none'>Add To Do:</Heading>
+        </Box>
+        <AccordionIcon />
+      </AccordionButton>
+    </h2>
+    <AccordionPanel pb={4}>
+    <AddTodo />
+    </AccordionPanel>
+  </AccordionItem>
+  </Accordion>
+    <Box hideFrom='md'> <TodoList /> </Box>
+    <SimpleGrid hideBelow='md' columns={2} alignContent="center">
      <Box> <TodoList /> </Box> <Box> <AddTodo /></Box>
    </SimpleGrid>
     </TabPanel>
+
     <TabPanel>
-    <SimpleGrid columns={2} alignContent="center">
-     <Box> <MemoList /> </Box> <Box> <AddMemo /></Box>
+    <Accordion hideFrom='md'my={1} defaultIndex={[0]} allowMultiple>
+  <AccordionItem>
+    <h2>
+      <AccordionButton px='0'>
+        <Box as="span" flex='1' textAlign='left'>
+          <Heading size='sm' p='none'>Add Event:</Heading>
+        </Box>
+        <AccordionIcon />
+      </AccordionButton>
+    </h2>
+    <AccordionPanel pb={4}>
+    <AddEvent />
+    </AccordionPanel>
+  </AccordionItem>
+  </Accordion>
+  <Box hideFrom='md'> <EventList /> </Box>
+    <SimpleGrid hideBelow='md'columns={2} alignContent="center">
+     <Box> <EventList /> </Box> <Box> <AddEvent /></Box>
    </SimpleGrid>
     </TabPanel>
+
     <TabPanel>
-    <SimpleGrid columns={2} alignContent="center">
+    <Accordion hideFrom='md'my={1} defaultIndex={[0]} allowMultiple>
+  <AccordionItem>
+    <h2>
+      <AccordionButton px='0'>
+        <Box as="span" flex='1' textAlign='left'>
+          <Heading size='sm' p='none'>Add Contact:</Heading>
+        </Box>
+        <AccordionIcon />
+      </AccordionButton>
+    </h2>
+    <AccordionPanel pb={4}>
+    <AddContact />
+    </AccordionPanel>
+  </AccordionItem>
+  </Accordion>
+  <Box hideFrom='md'> <ContactList /> </Box>
+    <SimpleGrid hideBelow='md' columns={2} alignContent="center">
      <Box> <ContactList /> </Box> <Box> <AddContact /></Box>
    </SimpleGrid>
     </TabPanel>

@@ -12,32 +12,32 @@ import {
     import { collection, onSnapshot, query, where } from "firebase/firestore";
     import { db } from "../firebase";
     import { FaTrash } from "react-icons/fa";
-    import { deleteMemo, toggleMemoUrgency } from "../api/memo";
-    const MemoList = () => {
-    const [memos, setMemos] = React.useState([]);
+    import { deleteEvent, toggleEventUrgency } from "../api/event";
+    const EventList = () => {
+    const [events, setEvents] = React.useState([]);
     const { user } = useAuth();
     const toast = useToast();
     
     useEffect(() => {
         const refreshData = () => {
             if (!user) {
-            setMemos([]);
+            setEvents([]);
             return;
             }
-            const q = query(collection(db, "memo"), where("user", "==", user.uid));
+            const q = query(collection(db, "event"), where("user", "==", user.uid));
             onSnapshot(q, (querySnapchot) => {
             let ar = [];
             querySnapchot.docs.forEach((doc) => {
             ar.push({ id: doc.id, ...doc.data() });
             });
-            setMemos(ar);
+            setEvents(ar);
             });
             };
     refreshData();}, [user]);
-    const handleMemoDelete = async (id) => {
-    if (confirm("Are you sure you wanna delete this memo?")) {
-    deleteMemo(id);
-    toast({ title: "Memo deleted successfully", status: "success" });
+    const handleEventDelete = async (id) => {
+    if (confirm("Are you sure you wanna delete this event?")) {
+    deleteEvent(id);
+    toast({ title: "Event deleted successfully", status: "success" });
     }
     };
 
@@ -46,22 +46,22 @@ import {
     const handleToggle = async (id, urgency) => {
         const newUrgency = urgency == "notUrgent" ? "urgent" : urgency == "urgent" ? "asap" : "notUrgent";
 
-        await toggleMemoUrgency({ docId: id, urgency: newUrgency });
+        await toggleEventUrgency({ docId: id, urgency: newUrgency });
         toast({
-        title: `Memo marked ${newUrgency}`,
+        title: `Event marked ${newUrgency}`,
         status: newUrgency == "notUrgent" ? "success" : newUrgency == "urgent" ? "warning" : "error"
         });
         };
  
     return (
-    <Box maxW="50%">
-    <Heading size="sm">Memo List:</Heading>
-    <Box mt={5}>
+    <Box>
+    <Heading size="sm">Event List:</Heading>
+    <Box mt={5} me={8}>
     <SimpleGrid columns={1} spacing={8}>
-    {memos &&
-    memos.map((memo) => (
+    {events &&
+    events.map((event) => (
     <Box
-    key={memo.id}
+    key={event.id}
     p={3}
     boxShadow="2xl"
     shadow={"dark-lg"}
@@ -69,7 +69,7 @@ import {
     _hover={{ boxShadow: "sm" }}
     >
     <Heading as="h3" fontSize={"xl"}>
-    <Link key={memo.id} href={`/memo/${memo.id}`}>{memo.title}</Link>{" "}
+    <Link key={event.id} href={`/event/${event.id}`}>{event.title}</Link>{" "}
     <Badge
     color="red.500"
     bg="inherit"
@@ -80,7 +80,7 @@ import {
     }}
     float="right"
     size="xs"
-    onClick={() => handleMemoDelete(memo.id)}
+    onClick={() => handleEventDelete(event.id)}
     >
     <FaTrash />
     </Badge>
@@ -88,13 +88,13 @@ import {
     <Badge
     float="right"
     opacity="0.8"
-    bg={memo.urgency == "notUrgent" ? "green.500" : memo.urgency == "urgent" ? "yellow.500" : "red.500"}
-    onClick={() => handleToggle(memo.id, memo.urgency)}
+    bg={event.urgency == "notUrgent" ? "green.500" : event.urgency == "urgent" ? "yellow.500" : "red.500"}
+    onClick={() => handleToggle(event.id, event.urgency)}
     >
-    {memo.urgency}
+    {event.urgency}
     </Badge>
     </Heading>
-    <Text>{memo.description}</Text>
+    <Text>{event.description}</Text>
     </Box>
     ))}
     </SimpleGrid>
@@ -102,4 +102,4 @@ import {
     </Box>
     );
     };
-    export default MemoList;
+    export default EventList;

@@ -14,18 +14,17 @@ import {
 } from "firebase/firestore";
 import { db } from "../../firebase";
 
-const MemoItem = ({itemData}) => {
+const EventItem = ({itemData}) => {
     const { user } = useAuth() || {};
     if (!user) {
         return;
     }
 
     return (
-
         <Container maxW="7xl">
 <Auth />
 <Heading size="xs"><Link href="../">back to home</Link></Heading>
-<Heading fontFamily={'"Century Gothic", sans-serif'} letterSpacing={'5px'} textTransform={'uppercase'} textAlign={'center'} fontWeight={'normal'}>Memo</Heading>
+<Heading fontFamily={'"Century Gothic", sans-serif'} letterSpacing={'5px'} textTransform={'uppercase'} textAlign={'center'} fontWeight={'normal'}>Event</Heading>
 <Box p={5} mt={5} bg='#f0f0f0'>
             <Heading as="h1" fontSize={"xl"}>
                 { itemData.title }
@@ -47,7 +46,7 @@ const MemoItem = ({itemData}) => {
 
 export async function getServerSideProps(stuff) {
     let itemData = null;
-    const docRef = doc( db, "memo", stuff.params.id)
+    const docRef = doc( db, "event", stuff.params.id)
     const docSnap = await getDoc(docRef);
     if (docSnap.exists() ) {
     itemData = docSnap.data();
@@ -60,4 +59,4 @@ export async function getServerSideProps(stuff) {
     };
 }
 
-export default MemoItem;
+export default EventItem;

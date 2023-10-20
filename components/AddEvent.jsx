@@ -10,18 +10,18 @@ useToast,
 Heading
 } from "@chakra-ui/react";
 import useAuth from "../hooks/useAuth";
-import { addMemo } from "../api/memo";
-const AddMemo = () => {
+import { addEvent } from "../api/event";
+const AddEvent = () => {
 const [title, setTitle] = React.useState("");
 const [description, setDescription] = React.useState("");
 const [urgency, setUrgency] = React.useState("normal");
 const [isLoading, setIsLoading] = React.useState(false);
 const toast = useToast();
 const { isLoggedIn, user } = useAuth();
-const handleMemoCreate = async () => {
+const handleEventCreate = async () => {
 if (!isLoggedIn) {
 toast({
-title: "You must be logged in to create a memo",
+title: "You must be logged in to create a event",
 status: "error",
 duration: 9000,
 isClosable: true,
@@ -29,22 +29,22 @@ isClosable: true,
 return;
 }
 setIsLoading(true);
-const memo = {
+const event = {
 title,
 description,
 urgency,
 userId: user.uid,
 };
-await addMemo(memo);
+await addEvent(event);
 setIsLoading(false);
 setTitle("");
 setDescription("");
 setUrgency("pending");
-toast({ title: "Memo created successfully", status: "success" });
+toast({ title: "Event created successfully", status: "success" });
 };
 return (
-<Box w="50%">
-<Heading size="sm">Add Memo:</Heading>
+<Box>
+<Heading size="sm">Add Event:</Heading>
 <Box margin={"0 auto"} display="block" mt={5}>
 <Stack direction="column">
 <Input
@@ -78,7 +78,7 @@ style={{ color: "red", fontWeight: "bold" }}
 </option>
 </Select>
 <Button
-onClick={() => handleMemoCreate()}
+onClick={() => handleEventCreate()}
 disabled={title.length < 1 || description.length < 1 || isLoading}
 colorScheme="teal"
 variant="solid"
@@ -90,4 +90,4 @@ Add
 </Box>
 );
 };
-export default AddMemo;
+export default AddEvent;

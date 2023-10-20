@@ -3,7 +3,6 @@ import {
 Box,
 Input,
 Button,
-Textarea,
 Stack,
 useToast,
 Heading
@@ -48,7 +47,7 @@ setNotes("");
 toast({ title: "Contact created successfully", status: "success" });
 };
 return (
-<Box w="50%">
+<Box w={{base: "inherit", md: "50%"}}>
 <Heading size="sm">Add Contact:</Heading>
 <Box margin={"0 auto"} display="block" mt={5}>
 <Stack direction="column">
@@ -57,17 +56,17 @@ placeholder="Name"
 value={name}
 onChange={(e) => setName(e.target.value)}
 />
-<Textarea
+<Input
 placeholder="Phone Number"
 value={phoneNumber}
 onChange={(e) => setPhoneNumber(e.target.value)}
 />
-<Textarea
+<Input
 placeholder="2nd Phone Number"
 value={phoneNumber2}
 onChange={(e) => setPhoneNumber2(e.target.value)}
 />
-<Textarea
+<Input
 placeholder="Email"
 value={email}
 onChange={(e) => setEmail(e.target.value)}
