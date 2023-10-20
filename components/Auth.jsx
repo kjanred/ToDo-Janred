@@ -34,13 +34,11 @@ return (
     <Box>
      <Heading size='2xl' fontFamily={'"Century Gothic", sans-serif'} letterSpacing={'5px'} textTransform={'uppercase'} textAlign={'center'} fontWeight={'normal'} textShadow='3px 3px 5px #808080' m='6'>EasyNotes</Heading>
     </Box>
-    <Box display="flex">
+    
     <Box mx={3}>
     <Button onClick={() => toggleColorMode()}>
     {colorMode == "dark" ? <FaSun /> : <FaMoon />}
     </Button>{" "}
-    </Box>
-    <Box>
     {isLoggedIn && (
     <>
     <Text color="green.500">{user.email}</Text>
@@ -55,7 +53,7 @@ return (
     </Button>
     )}
     </Box>
-    </Box>
+
 </Box>
 );
 };
