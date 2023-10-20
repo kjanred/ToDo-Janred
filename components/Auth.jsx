@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, Button, Link, Text, useColorMode } from "@chakra-ui/react";
+import { Box, Button, Link, Text, useColorMode, Heading } from "@chakra-ui/react";
 import { signInWithPopup, GoogleAuthProvider } from "firebase/auth";
 import { FaGoogle, FaMoon, FaSun } from "react-icons/fa";
 import { auth } from "../firebase";
@@ -32,23 +32,15 @@ const credential = GoogleAuthProvider.credentialFromError(error);
 return (
 <Box mt={5} display="flex" alignItems="center" justifyContent="space-between">
     <Box>
-        <Link href="/add-todo">Add To Do</Link>
+     <Heading size='2xl' fontFamily={'"Century Gothic", sans-serif'} letterSpacing={'5px'} textTransform={'uppercase'} textAlign={'center'} fontWeight={'normal'} textShadow='3px 3px 5px #808080' m='6'>EasyNotes</Heading>
     </Box>
-    <Box>
-        <Link href="/add-memo">Add Memo</Link>
-    </Box>
-    <Box>
-        <Link href="/add-contact">Add Contact</Link>
-    </Box>
-    <Box>
-        <Link href="/">
-            Home List
-        </Link>
-    </Box>
-    <Box>
+    <Box display="flex">
+    <Box mx={3}>
     <Button onClick={() => toggleColorMode()}>
     {colorMode == "dark" ? <FaSun /> : <FaMoon />}
     </Button>{" "}
+    </Box>
+    <Box>
     {isLoggedIn && (
     <>
     <Text color="green.500">{user.email}</Text>
@@ -62,6 +54,7 @@ return (
     Login with Google
     </Button>
     )}
+    </Box>
     </Box>
 </Box>
 );
