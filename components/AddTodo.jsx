@@ -44,7 +44,6 @@ toast({ title: "Todo created successfully", status: "success" });
 };
 return (
 <Box w={{base: "inherit", md: "50%"}}>
-<Heading size="sm">Add To Do:</Heading>
 <Box margin={"0 auto"} display="block" mt={5}>
 <Stack direction="column">
 <Input

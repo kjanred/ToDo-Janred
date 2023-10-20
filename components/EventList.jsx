@@ -55,7 +55,6 @@ import {
  
     return (
     <Box>
-    <Heading size="sm">Event List:</Heading>
     <Box mt={5} me={8}>
     <SimpleGrid columns={1} spacing={8}>
     {events &&

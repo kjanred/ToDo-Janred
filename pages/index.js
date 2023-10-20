@@ -49,9 +49,16 @@ return (
     </AccordionPanel>
   </AccordionItem>
   </Accordion>
-    <Box hideFrom='md'> <TodoList /> </Box>
+    <Box hideFrom='md'> 
+    <Heading size="sm">To Do List:</Heading>
+    <TodoList /> </Box>
     <SimpleGrid hideBelow='md' columns={2} alignContent="center">
-     <Box> <TodoList /> </Box> <Box> <AddTodo /></Box>
+     <Box> 
+     <Heading size="sm">To Do List:</Heading>
+      <TodoList /> </Box> 
+      <Box> 
+      <Heading size="sm">Add To Do:</Heading>
+        <AddTodo /></Box>
    </SimpleGrid>
     </TabPanel>
 
@@ -71,9 +78,18 @@ return (
     </AccordionPanel>
   </AccordionItem>
   </Accordion>
-  <Box hideFrom='md'> <EventList /> </Box>
+  <Box hideFrom='md'> 
+  <Heading size="sm">Event List:</Heading>
+  <EventList /> </Box>
     <SimpleGrid hideBelow='md'columns={2} alignContent="center">
-     <Box> <EventList /> </Box> <Box> <AddEvent /></Box>
+     <Box> 
+     <Heading size="sm">Event List:</Heading>
+      <EventList /> 
+      </Box> 
+      <Box>
+        <Heading size="sm">Add Event:</Heading>
+        <AddEvent />
+        </Box>
    </SimpleGrid>
     </TabPanel>
 
@@ -93,9 +109,20 @@ return (
     </AccordionPanel>
   </AccordionItem>
   </Accordion>
-  <Box hideFrom='md'> <ContactList /> </Box>
+
+  <Box hideFrom='md'>
+    <Heading size="sm">Contact List:</Heading>
+    <ContactList /> 
+  </Box>
     <SimpleGrid hideBelow='md' columns={2} alignContent="center">
-     <Box> <ContactList /> </Box> <Box> <AddContact /></Box>
+      <Box>
+        <Heading size="sm">Contact List:</Heading>
+        <ContactList /> 
+      </Box> 
+      <Box>
+        <Heading size="sm">Add Contact:</Heading> 
+        <AddContact />
+      </Box>
    </SimpleGrid>
     </TabPanel>
   </TabPanels>

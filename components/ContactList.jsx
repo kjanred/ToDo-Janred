@@ -44,7 +44,6 @@ import {
  
     return (
     <Box>
-    <Heading size="sm">Contact List:</Heading>
     <Box mt={5} me={8}>
     <SimpleGrid columns={1} spacing={8}>
     {contacts &&
