@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, Button, Link, Text, useColorMode, Heading } from "@chakra-ui/react";
+import { Box, Button, Link, Text, useColorMode, Heading, SimpleGrid } from "@chakra-ui/react";
 import { signInWithPopup, GoogleAuthProvider } from "firebase/auth";
 import { FaGoogle, FaMoon, FaSun } from "react-icons/fa";
 import { auth } from "../firebase";
@@ -30,12 +30,32 @@ const credential = GoogleAuthProvider.credentialFromError(error);
 });
 };
 return (
-<Box mt={5} display="flex" alignItems="center" justifyContent="space-between">
+<Box mt={5} display={{base: "block", md: "flex"}} alignItems="center" justifyContent="space-between">
     <Box>
      <Heading size='2xl' fontFamily={'"Century Gothic", sans-serif'} letterSpacing={'5px'} textTransform={'uppercase'} textAlign={'center'} fontWeight={'normal'} textShadow='3px 3px 5px #808080' m='6'>EasyNotes</Heading>
     </Box>
-    
-    <Box mx={3}>
+    <SimpleGrid columns={2} hideFrom='md'>
+    <Box><Button onClick={() => toggleColorMode()}>
+    {colorMode == "dark" ? <FaSun /> : <FaMoon />}
+    </Button>{" "}</Box>
+    <Box>
+    {isLoggedIn && (
+    <>
+    <Text color="green.500">{user.email}</Text>
+    <Link color="red.500" onClick={() => auth.signOut()}>
+    Logout
+    </Link>
+    </>
+    )}
+    {!isLoggedIn && (
+    <Button leftIcon={<FaGoogle />} onClick={() => handleAuth()}>
+    Login with Google
+    </Button>
+    )}  
+    </Box>
+    </SimpleGrid>
+
+    <Box mx={3} hideBelow='md'>
     <Button onClick={() => toggleColorMode()}>
     {colorMode == "dark" ? <FaSun /> : <FaMoon />}
     </Button>{" "}
