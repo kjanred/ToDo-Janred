@@ -11,7 +11,7 @@ import { SimpleGrid,
          AccordionButton,
          AccordionPanel,
          AccordionIcon,
-        Heading } from "@chakra-ui/react";
+         Heading} from "@chakra-ui/react";
 import Auth from "../components/Auth";
 import TodoList from "../components/TodoList";
 import EventList from "../components/EventList";
@@ -25,7 +25,7 @@ export default function Home() {
 return (
 <Container maxW="7xl">
 <Auth />
-<Tabs>
+<Tabs size={{base: "md", md: "lg"}}>
   <TabList>
     <Tab>To Dos</Tab>
     <Tab>Events</Tab>
@@ -34,7 +34,7 @@ return (
   <TabPanels>
 
     <TabPanel>
-    <Accordion hideFrom='md'my={1} defaultIndex={[0]} allowMultiple>
+    <Accordion hideFrom='md'my={1} defaultIndex={[0]} allowToggle>
   <AccordionItem>
     <h2>
       <AccordionButton px='0'>
@@ -63,7 +63,7 @@ return (
     </TabPanel>
 
     <TabPanel>
-    <Accordion hideFrom='md'my={1} defaultIndex={[0]} allowMultiple>
+    <Accordion hideFrom='md'my={1} defaultIndex={[0]} allowToggle>
   <AccordionItem>
     <h2>
       <AccordionButton px='0'>
@@ -94,7 +94,7 @@ return (
     </TabPanel>
 
     <TabPanel>
-    <Accordion hideFrom='md'my={1} defaultIndex={[0]} allowMultiple>
+    <Accordion hideFrom='md'my={1} defaultIndex={[0]} allowToggle>
   <AccordionItem>
     <h2>
       <AccordionButton px='0'>
