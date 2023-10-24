@@ -7,16 +7,16 @@ import {
   Button,
   Text
 } from "@chakra-ui/react";
-import useAuth from "../../hooks/useAuth";
+import useAuth from "../../../hooks/useAuth";
 import {
   doc,
   getDoc,
   updateDoc
 } from "firebase/firestore";
-import { db } from "../../firebase";
+import { db } from "../../../firebase";
 
 // define the jsx component to show just one single to do in our ui
-const TodoItem = ({ itemData }) => {
+const EditItem = ({ itemData }) => {
   const [inputTitle, setInputTitle] = useState(itemData.title);
   const [inputDescription, setInputDescription] = useState(itemData.description);
   const [statusMsg, setStatusMsg] = useState('');
@@ -98,4 +98,4 @@ export async function getServerSideProps(context) {
 }
 
 // export the component
-export default TodoItem;
+export default EditItem;

@@ -1,4 +1,5 @@
 import React from "react";
+import { EditIcon, ArrowLeftIcon } from '@chakra-ui/icons'
 import Link from "next/link";
 import {
     Box,
@@ -19,12 +20,15 @@ const TodoItem = ({itemData}) => {
     if (!user) {
         return;
     }
-
+    
     return (
 
         <Container maxW="7xl">
 <Auth />
-<Heading size="xs"><Link href="../">back to home</Link></Heading>
+<Heading size="xs"><Link href="../"> <ArrowLeftIcon /> back to home</Link></Heading>
+
+    <Link href={`/todo/edit/${encodeURIComponent(itemData.id)}`}><EditIcon />{itemData.title}</Link>{" "}
+
 <Heading fontFamily={'"Century Gothic", sans-serif'} letterSpacing={'5px'} textTransform={'uppercase'} textAlign={'center'} fontWeight={'normal'}>To Do</Heading>
 <Box p={5} mt={5} bg='#f0f0f0'>
             <Heading as="h1" fontSize={"3xl"}>
@@ -51,6 +55,7 @@ export async function getServerSideProps(stuff) {
     const docSnap = await getDoc(docRef);
     if (docSnap.exists() ) {
     itemData = docSnap.data();
+    itemData.id = stuff.params.id;
     }
 
     return {
