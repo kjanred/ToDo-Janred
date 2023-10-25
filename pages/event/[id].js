@@ -1,10 +1,15 @@
 import React from "react";
+import { EditIcon, ArrowLeftIcon } from '@chakra-ui/icons'
 import Link from "next/link";
 import {
     Box,
     Heading,
     Text,
-    Container
+    Container,
+    Flex,
+    Spacer,
+    Button,
+    Divider
 } from "@chakra-ui/react";
 import Auth from "../../components/Auth";
 import useAuth from "../../hooks/useAuth";
@@ -23,21 +28,32 @@ const EventItem = ({itemData}) => {
     return (
         <Container maxW="7xl">
 <Auth />
-<Heading size="xs"><Link href="../">back to home</Link></Heading>
+<Heading size="xs"><Link href="../"> <ArrowLeftIcon /> back to lists</Link></Heading>
+
+
 <Heading fontFamily={'"Century Gothic", sans-serif'} letterSpacing={'5px'} textTransform={'uppercase'} textAlign={'center'} fontWeight={'normal'}>Event</Heading>
-<Box p={5} mt={5} bg='#f0f0f0'>
-            <Heading as="h1" fontSize={"xl"}>
-                { itemData.title }
-            </Heading>
+<Box p={5} mt={5} mb={12} boxShadow='dark-lg' bg='blackAlpha.200' borderRadius='5px' >
+    <Flex>        
+        <Heading lineHeight='-1' fontSize={"3xl"} width='lg'>
+            { itemData.title } 
+        </Heading>
+            <Spacer/>
+        <Box><Link href={`/event/edit/${encodeURIComponent(itemData.id)}`}><Button mb={2} bg="whiteAlpha.600" leftIcon={<EditIcon  />} >Edit</Button></Link></Box>
+    </Flex>
+    <Divider my={1} borderWidth='2px' borderColor='black'/>
             <Text fontSize={"lg"}>
-            Description: <span className="listInfo">{ itemData.description }</span>
+             <span className="listInfo">{ itemData.description }</span>
             </Text>
+
+            <Flex mt={3}>
             <Text fontSize={"sm"}>
-            Urgency: <span className="listInfo">{ itemData.urgency }</span>
+              status:  <span className="listInfo">{ itemData.urgency }</span>
             </Text>
+            <Spacer />
             <Text fontSize={"sm"}>
-            Created: <span className="listInfo">{ itemData.createdAt }</span>
+              created:  <span className="listInfo">{new Date(itemData.createdAt).toLocaleDateString('en-US')}</span>
             </Text>
+            </Flex>
 
         </Box>
 </Container>
@@ -50,6 +66,7 @@ export async function getServerSideProps(stuff) {
     const docSnap = await getDoc(docRef);
     if (docSnap.exists() ) {
     itemData = docSnap.data();
+    itemData.id = stuff.params.id;
     }
 
     return {

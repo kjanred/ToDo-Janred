@@ -1,5 +1,7 @@
 import { SimpleGrid,
          Box,
+         Spacer,
+         Flex,
          Container,
          Tabs, 
          TabList, 
@@ -52,13 +54,16 @@ return (
     <Box hideFrom='md'> 
     <Heading size="sm">To Do List:</Heading>
     <TodoList /> </Box>
-    <SimpleGrid hideBelow='md' columns={2} alignContent="center">
+    <SimpleGrid hideBelow='md' columns={2}>
      <Box> 
      <Heading size="sm">To Do List:</Heading>
       <TodoList /> </Box> 
-      <Box> 
-      <Heading size="sm">Add To Do:</Heading>
-        <AddTodo /></Box>
+      
+      <Box mx='15%'>
+        <Heading size="sm">Add To Do:</Heading>
+        <AddTodo />
+        </Box>
+
    </SimpleGrid>
     </TabPanel>
 
@@ -86,7 +91,7 @@ return (
      <Heading size="sm">Event List:</Heading>
       <EventList /> 
       </Box> 
-      <Box>
+      <Box mx='15%'>
         <Heading size="sm">Add Event:</Heading>
         <AddEvent />
         </Box>
@@ -119,7 +124,7 @@ return (
         <Heading size="sm">Contact List:</Heading>
         <ContactList /> 
       </Box> 
-      <Box>
+      <Box mx='15%'>
         <Heading size="sm">Add Contact:</Heading> 
         <AddContact />
       </Box>

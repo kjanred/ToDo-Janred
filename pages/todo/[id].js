@@ -35,7 +35,7 @@ const TodoItem = ({itemData}) => {
 
 
 <Heading fontFamily={'"Century Gothic", sans-serif'} letterSpacing={'5px'} textTransform={'uppercase'} textAlign={'center'} fontWeight={'normal'}>To Do</Heading>
-<Box p={5} mt={5} bg='blackAlpha.200' borderRadius='5px' >
+<Box p={5} mt={5} mb={12} boxShadow='dark-lg' bg='blackAlpha.200' borderRadius='5px' >
     <Flex>        
         <Heading lineHeight='-1' fontSize={"3xl"} width='lg'>
             { itemData.title } 

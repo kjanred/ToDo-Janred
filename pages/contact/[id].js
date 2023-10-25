@@ -1,10 +1,15 @@
 import React from "react";
+import { EditIcon, ArrowLeftIcon } from '@chakra-ui/icons'
 import Link from "next/link";
 import {
     Box,
     Heading,
     Text,
-    Container
+    Container,
+    Flex,
+    Spacer,
+    Button,
+    Divider
 } from "@chakra-ui/react";
 import Auth from "../../components/Auth";
 import useAuth from "../../hooks/useAuth";
@@ -24,27 +29,35 @@ const ContactItem = ({itemData}) => {
 
         <Container maxW="7xl">
 <Auth />
-<Heading size="xs"><Link href="../">back to home</Link></Heading>
+<Heading size="xs"><Link href="../"> <ArrowLeftIcon /> back to lists</Link></Heading>
+
+
 <Heading fontFamily={'"Century Gothic", sans-serif'} letterSpacing={'5px'} textTransform={'uppercase'} textAlign={'center'} fontWeight={'normal'}>Contact</Heading>
-<Box p={5} mt={5} bg='#f0f0f0'>
-            <Heading as="h1" fontSize={"3xl"}>
-                { itemData.name }
-            </Heading>
-            <Text fontSize={"sm"}>
-             Phone Number: <span className="listInfo">{ itemData.phoneNumber }</span>
+<Box p={5} mt={5} mb={12} boxShadow='dark-lg' bg='blackAlpha.200' borderRadius='5px' >
+    <Flex>        
+        <Heading lineHeight='-1' fontSize={"3xl"} width='lg'>
+            { itemData.name } 
+        </Heading>
+            <Spacer/>
+        <Box><Link href={`/event/edit/${encodeURIComponent(itemData.id)}`}><Button mb={2} bg="whiteAlpha.600" leftIcon={<EditIcon  />} >Edit</Button></Link></Box>
+    </Flex>
+    <Divider my={1} borderWidth='2px' borderColor='black'/>
+            <Text fontSize={"md"}>
+             phone: <span className="listInfo">{ itemData.phoneNumber }</span>
             </Text>
-            <Text fontSize={"sm"}>
-              2nd Phone Number:  <span className="listInfo">{ itemData.phoneNumber2 }</span>
+            <Text fontSize={"md"}>
+             alt phone: <span className="listInfo">{ itemData.phoneNumber2 }</span>
             </Text>
-            <Text fontSize={"sm"}>
-              Email:  <span className="listInfo">{ itemData.email }</span>
+            <Text fontSize={"md"}>
+             email: <span className="listInfo">{ itemData.email }</span>
             </Text>
+
+            <Flex mt={3}>
+            <Spacer />
             <Text fontSize={"sm"}>
-              Notes:  <span className="listInfo">{ itemData.notes }</span>
+              created:  <span className="listInfo">{new Date(itemData.createdAt).toLocaleDateString('en-US')}</span>
             </Text>
-            <Text fontSize={"sm"}>
-              Created:  <span className="listInfo">{ itemData.createdAt }</span>
-            </Text>
+            </Flex>
 
         </Box>
 </Container>
@@ -57,6 +70,7 @@ export async function getServerSideProps(stuff) {
     const docSnap = await getDoc(docRef);
     if (docSnap.exists() ) {
     itemData = docSnap.data();
+    itemData.id = stuff.params.id;
     }
 
     return {

@@ -47,7 +47,7 @@ setNotes("");
 toast({ title: "Contact created successfully", status: "success" });
 };
 return (
-<Box w={{base: "inherit", md: "50%"}}>
+<Box>
 <Box margin={"0 auto"} display="block" mt={5}>
 <Stack direction="column">
 <Input
