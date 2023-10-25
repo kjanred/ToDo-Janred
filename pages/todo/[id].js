@@ -5,7 +5,11 @@ import {
     Box,
     Heading,
     Text,
-    Container
+    Container,
+    Flex,
+    Spacer,
+    Button,
+    Divider
 } from "@chakra-ui/react";
 import Auth from "../../components/Auth";
 import useAuth from "../../hooks/useAuth";
@@ -16,6 +20,8 @@ import {
 import { db } from "../../firebase";
 
 const TodoItem = ({itemData}) => {
+
+
     const { user } = useAuth() || {};
     if (!user) {
         return;
@@ -25,24 +31,32 @@ const TodoItem = ({itemData}) => {
 
         <Container maxW="7xl">
 <Auth />
-<Heading size="xs"><Link href="../"> <ArrowLeftIcon /> back to home</Link></Heading>
+<Heading size="xs"><Link href="../"> <ArrowLeftIcon /> back to lists</Link></Heading>
 
-    <Link href={`/todo/edit/${encodeURIComponent(itemData.id)}`}><EditIcon />{itemData.title}</Link>{" "}
 
 <Heading fontFamily={'"Century Gothic", sans-serif'} letterSpacing={'5px'} textTransform={'uppercase'} textAlign={'center'} fontWeight={'normal'}>To Do</Heading>
-<Box p={5} mt={5} bg='#f0f0f0'>
-            <Heading as="h1" fontSize={"3xl"}>
-                { itemData.title }
-            </Heading>
+<Box p={5} mt={5} bg='blackAlpha.200' borderRadius='5px' >
+    <Flex>        
+        <Heading lineHeight='-1' fontSize={"3xl"} width='lg'>
+            { itemData.title } 
+        </Heading>
+            <Spacer/>
+        <Box><Link href={`/todo/edit/${encodeURIComponent(itemData.id)}`}><Button mb={2} bg="whiteAlpha.600" leftIcon={<EditIcon  />} >Edit</Button></Link></Box>
+    </Flex>
+    <Divider my={1} borderWidth='2px' borderColor='black'/>
             <Text fontSize={"lg"}>
-             Description: <span className="listInfo">{ itemData.description }</span>
+             <span className="listInfo">{ itemData.description }</span>
             </Text>
+
+            <Flex mt={3}>
             <Text fontSize={"sm"}>
-              Status:  <span className="listInfo">{ itemData.status }</span>
+              status:  <span className="listInfo">{ itemData.status }</span>
             </Text>
+            <Spacer />
             <Text fontSize={"sm"}>
-              Created:  <span className="listInfo">{ itemData.createdAt }</span>
+              created:  <span className="listInfo">{new Date(itemData.createdAt).toLocaleDateString('en-US')}</span>
             </Text>
+            </Flex>
 
         </Box>
 </Container>

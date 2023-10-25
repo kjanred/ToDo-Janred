@@ -1,12 +1,16 @@
 import React, { useState } from 'react';
+import { ArrowLeftIcon } from '@chakra-ui/icons'
+import Link from "next/link";
 import {
   Heading,
-  Flex,
   InputGroup,
   Input,
   Button,
-  Text
+  Text,
+  Box,
+  Container
 } from "@chakra-ui/react";
+import Auth from '../../../components/Auth';
 import useAuth from "../../../hooks/useAuth";
 import {
   doc,
@@ -49,7 +53,11 @@ const EditItem = ({ itemData }) => {
   // if our code continues execution to here, a user is logged in
   // finally return the jsx component
   return (
-    <Flex flexDir="column" maxW={800} align="center" justify="start" minH="100vh" m="auto" px={4} py={3}>
+    <Container maxW="7xl">
+      <Auth />
+      <Heading size="xs"><Link href={`/todo/${encodeURIComponent(itemData.id)}`}><ArrowLeftIcon/> Exit Edit</Link></Heading>
+
+      <Heading fontFamily={'"Century Gothic", sans-serif'} letterSpacing={'5px'} textTransform={'uppercase'} textAlign={'center'} fontWeight={'normal'}>Editing</Heading>
       <InputGroup>
         <Input type="text" value={inputTitle} onChange={(e) => setInputTitle(e.target.value)} placeholder="Title" />
         <Input type="text" value={inputDescription} onChange={(e) => setInputDescription(e.target.value)} placeholder="Description" />
@@ -69,7 +77,7 @@ const EditItem = ({ itemData }) => {
       <Text>
         {statusMsg}
       </Text>
-    </Flex>
+      </Container>
   );
 };
 
