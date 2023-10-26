@@ -1,16 +1,25 @@
 import React, { useState } from 'react';
 import { ArrowLeftIcon } from '@chakra-ui/icons'
 import Link from "next/link";
+import { toggleTodoStatus } from "../../../api/todo";
 import {
   Heading,
+  Badge,
   InputGroup,
+  InputLeftAddon,
   Input,
   Button,
   Text,
   Box,
-  Container
+  Container,
+  Stack,
+  Flex,
+  Spacer,
+  Divider,
+  useToast
 } from "@chakra-ui/react";
 import Auth from '../../../components/Auth';
+import { FaToggleOff, FaToggleOn } from "react-icons/fa";
 import useAuth from "../../../hooks/useAuth";
 import {
   doc,
@@ -18,17 +27,28 @@ import {
   updateDoc
 } from "firebase/firestore";
 import { db } from "../../../firebase";
+import { FaStackExchange } from 'react-icons/fa';
 
 // define the jsx component to show just one single to do in our ui
 const EditItem = ({ itemData }) => {
   const [inputTitle, setInputTitle] = useState(itemData.title);
   const [inputDescription, setInputDescription] = useState(itemData.description);
+  const [statusToggle, setStatusToggle] = useState(itemData.status);
   const [statusMsg, setStatusMsg] = useState('');
+  const toast = useToast();
   // enforce user login
   const { user } = useAuth() || {};
   if (!user) {
     return;
   }
+  const handleToggle = async (id, status) => {
+    const newStatus = status == "completed" ? "pending" : "completed";
+    await toggleTodoStatus({ docId: id, status: newStatus });
+    toast({
+    title: `Todo marked ${newStatus}`,
+    status: newStatus == "completed" ? "success" : "warning",
+    });
+    };
   // handle update of firestore document
   const sendData = async () => {
     console.log("sending! ", itemData);
@@ -37,7 +57,8 @@ const EditItem = ({ itemData }) => {
       docRef, 
       {
         title: inputTitle,
-        description: inputDescription
+        description: inputDescription,
+        status: statusToggle
       }
     ).then(
       docRef => {
@@ -58,25 +79,52 @@ const EditItem = ({ itemData }) => {
       <Heading size="xs"><Link href={`/todo/${encodeURIComponent(itemData.id)}`}><ArrowLeftIcon/> Exit Edit</Link></Heading>
 
       <Heading fontFamily={'"Century Gothic", sans-serif'} letterSpacing={'5px'} textTransform={'uppercase'} textAlign={'center'} fontWeight={'normal'}>Editing</Heading>
-      <InputGroup>
+      <Box p={5} mt={5} mb={12} boxShadow='dark-lg' bg='blackAlpha.200' borderRadius='5px' >
+      <Stack mb={5}>
+        <InputGroup size='lg'>
+        <InputLeftAddon fontWeight={'bold'} children='Title:' />
         <Input type="text" value={inputTitle} onChange={(e) => setInputTitle(e.target.value)} placeholder="Title" />
+        </InputGroup>
+        <Divider my={1} borderWidth='2px' borderColor='black'/>
+        <InputGroup>
+        <InputLeftAddon children='Desc:' />
         <Input type="text" value={inputDescription} onChange={(e) => setInputDescription(e.target.value)} placeholder="Description" />
-        <Button
-          ml={2}
-          onClick={() => sendData()}
-        >
-          Update
-        </Button>
-      </InputGroup>
-      <Text>
-        {itemData.status}
-      </Text>
+        </InputGroup>
+      </Stack>
+
+      <Flex>
+      <Badge
+    color={statusToggle == "pending" ? "complete" : "pending"}
+    onClick={(e) => setStatusToggle(e.target.value)}
+    bg="inherit"
+    transition={"0.2s"}
+    _hover={{
+    bg: "inherit",
+    transform: "scale(1.2)",
+    }}
+    size="sm"
+    >
+    {itemData.status == "pending" ? <FaToggleOff /> : <FaToggleOn />}
+    </Badge>
+    <Badge
+    size="sm"
+    opacity="0.8"
+    bg={itemData.status == "pending" ? "yellow.500" : "green.500"}
+    >
+    {itemData.status}
+    </Badge>
       <Text>
         {new Date(itemData.createdAt).toLocaleDateString('en-US')}
       </Text>
+      <Spacer />
       <Text>
         {statusMsg}
       </Text>
+      <Button onClick={() => sendData()} ml={2} bg="whiteAlpha.600" >Update</Button>
+      </Flex>
+
+      </Box>
+      
       </Container>
   );
 };

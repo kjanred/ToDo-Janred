@@ -4,7 +4,7 @@ import {
     Heading,
     SimpleGrid,
     Text,
-    useToast,
+    useToast
     } from "@chakra-ui/react";
     import Link from "next/link";
     import React, { useEffect } from "react";
