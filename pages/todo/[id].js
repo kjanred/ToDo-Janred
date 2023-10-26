@@ -31,20 +31,21 @@ const TodoItem = ({itemData}) => {
 
         <Container maxW="7xl">
 <Auth />
-<Heading size="xs"><Link href="../"> <ArrowLeftIcon /> back to lists</Link></Heading>
-
-
-<Heading fontFamily={'"Century Gothic", sans-serif'} letterSpacing={'5px'} textTransform={'uppercase'} textAlign={'center'} fontWeight={'normal'}>To Do</Heading>
+<Flex justifyContent='space-between' align='baseline'>
+        <Link href={`../`}> <Text fontSize='sm' fontWeight='bold'><ArrowLeftIcon/> back to lists</Text></Link>
+        <Text fontSize='4xl' fontFamily={'"Century Gothic", sans-serif'} letterSpacing={'5px'} textTransform={'uppercase'} fontWeight={'normal'}>To Do</Text>
+        <Box hideBelow='md'>{/*Invisible Box for center positioning using flex on md and above*/}<Text fontSize='sm' fontWeight='bold' visibility='hidden'><ArrowLeftIcon/> back to lists</Text></Box>
+      </Flex>
 <Box p={5} mt={5} mb={12} boxShadow='dark-lg' bg='blackAlpha.200' borderRadius='5px' >
     <Flex>        
-        <Heading lineHeight='-1' fontSize={"3xl"} width='lg'>
+        <Heading lineHeight='-1' fontSize={{base: '2xl', md: '3xl' }} width='lg'>
             { itemData.title } 
         </Heading>
             <Spacer/>
-        <Box><Link href={`/todo/edit/${encodeURIComponent(itemData.id)}`}><Button mb={2} bg="whiteAlpha.600" leftIcon={<EditIcon  />} >Edit</Button></Link></Box>
+        <Box><Link href={`/todo/edit/${encodeURIComponent(itemData.id)}`}><Button size={{base: 'sm', md: 'md' }} mb={2} bg="whiteAlpha.600" leftIcon={<EditIcon  />} >Edit</Button></Link></Box>
     </Flex>
-    <Divider my={1} borderWidth='2px' borderColor='black'/>
-            <Text fontSize={"lg"}>
+    <Divider my={1} borderWidth='1px' borderColor='blackAlpha.500'/>
+            <Text fontSize={{base: 'sm', md: 'lg' }}>
              <span className="listInfo">{ itemData.description }</span>
             </Text>
 

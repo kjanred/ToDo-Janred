@@ -35,11 +35,11 @@ const ContactItem = ({itemData}) => {
 <Heading fontFamily={'"Century Gothic", sans-serif'} letterSpacing={'5px'} textTransform={'uppercase'} textAlign={'center'} fontWeight={'normal'}>Contact</Heading>
 <Box p={5} mt={5} mb={12} boxShadow='dark-lg' bg='blackAlpha.200' borderRadius='5px' >
     <Flex>        
-        <Heading lineHeight='-1' fontSize={"3xl"} width='lg'>
+        <Heading lineHeight='-1' fontSize={{base: '2xl', md: '3xl' }} fontSize={"3xl"} width='lg'>
             { itemData.name } 
         </Heading>
             <Spacer/>
-        <Box><Link href={`/event/edit/${encodeURIComponent(itemData.id)}`}><Button mb={2} bg="whiteAlpha.600" leftIcon={<EditIcon  />} >Edit</Button></Link></Box>
+        <Box><Link href={`/event/edit/${encodeURIComponent(itemData.id)}`}><Button size={{base: 'sm', md: 'md' }} mb={2} bg="whiteAlpha.600" leftIcon={<EditIcon  />} >Edit</Button></Link></Box>
     </Flex>
     <Divider my={1} borderWidth='2px' borderColor='black'/>
             <Text fontSize={"md"}>

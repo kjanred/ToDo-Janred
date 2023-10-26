@@ -15,6 +15,7 @@ import {
   Flex,
   Divider,
   Spacer,
+  Hide,
   useToast
 } from "@chakra-ui/react";
 import Auth from '../../../components/Auth';
@@ -68,7 +69,7 @@ const EditItem = ({ itemData }) => {
   return (
     <Container maxW="7xl">
       <Auth />
-      <Flex justifyContent='space-between' align='center'>
+      <Flex justifyContent='space-between' align='baseline'>
         <Link href={`/todo/${encodeURIComponent(itemData.id)}`}> <Text fontSize='sm' fontWeight='bold'><ArrowLeftIcon/> exit edit</Text></Link>
         <Text fontSize='4xl' fontFamily={'"Century Gothic", sans-serif'} letterSpacing={'5px'} textTransform={'uppercase'} fontWeight={'normal'}>Editing</Text>
         <Box hideBelow='md'>{/*Invisible Box for center positioning using flex on md and above*/}<Text fontSize='sm' fontWeight='bold' visibility='hidden'><ArrowLeftIcon/> exit edit</Text></Box>
@@ -83,20 +84,25 @@ const EditItem = ({ itemData }) => {
         <Divider my={1} borderWidth='1px' borderColor='blackAlpha.500'/>
         
         <Textarea borderColor='blackAlpha.300' bg='white' type="text" value={inputDescription} onChange={(e) => setInputDescription(e.target.value)} placeholder="Description" />
-       
+        <Text textAlign='center'>
+        {statusMsg} <br/>
+        </Text>
       </Stack>
 
+      
+
       <Flex justifyContent='space-between' align='end'>
-        <Box pb='2px' width='115px'>
-      <Badge pe={2}
+        <Box pb='2px' width={{base: '98px', md: '135px' }}>
+      <Badge 
+       fontSize='lg'
+      pe={2}
       height='fit-content'
     onClick={() => setStatusToggle(statusToggle == "completed" ? "pending" : "completed")}
     bg="inherit"
     transition={"0.2s"}
-    transform='scale(1.2)'
     _hover={{
     bg: "inherit",
-    transform: "scale(1.5)",
+    transform: "scale(1.2)",
     }}
 
     >
@@ -105,20 +111,18 @@ const EditItem = ({ itemData }) => {
     <Badge
     opacity="0.8"
     bg={statusToggle == "pending" ? "yellow.500" : "green.500"}
-    fontSize='small'
+    fontSize={{base: '10px', md: 'md' }}
     >
     {statusToggle}
     </Badge>
     </Box>
-      <Text>
-        Created: {new Date(itemData.createdAt).toLocaleDateString('en-US')}
+      <Text fontSize={{base: 'xs', md: 'md' }}>
+        Created: <Box height='0px' mt='-7px' hideFrom='md'><br /></Box><span className='listInfo'>{new Date(itemData.createdAt).toLocaleDateString('en-US')}</span>
       </Text>
-    <Flex align='center'>
-      <Text>
-        {statusMsg}
-      </Text>
-      <Button onClick={() => sendData()} ml={2} bg="whiteAlpha.600" >Update</Button>
-      </Flex>
+    
+      
+      <Button size={{base: 'sm', md: 'md' }} onClick={() => sendData()} ml={2} bg="whiteAlpha.600" >Update</Button>
+      
       </Flex>
 
       
