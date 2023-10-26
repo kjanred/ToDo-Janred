@@ -41,14 +41,7 @@ const EditItem = ({ itemData }) => {
   if (!user) {
     return;
   }
-  const handleToggle = async (id, status) => {
-    const newStatus = status == "completed" ? "pending" : "completed";
-    await toggleTodoStatus({ docId: id, status: newStatus });
-    toast({
-    title: `Todo marked ${newStatus}`,
-    status: newStatus == "completed" ? "success" : "warning",
-    });
-    };
+ 
   // handle update of firestore document
   const sendData = async () => {
     console.log("sending! ", itemData);
@@ -83,7 +76,7 @@ const EditItem = ({ itemData }) => {
       <Stack mb={5}>
         <InputGroup size='lg'>
         <InputLeftAddon fontWeight={'bold'} children='Title:' />
-        <Input type="text" value={inputTitle} onChange={(e) => setInputTitle(e.target.value)} placeholder="Title" />
+        <Input fontWeight={'bold'}  type="text" value={inputTitle} onChange={(e) => setInputTitle(e.target.value)} placeholder="Title" />
         </InputGroup>
         <Divider my={1} borderWidth='2px' borderColor='black'/>
         <InputGroup>
@@ -92,10 +85,10 @@ const EditItem = ({ itemData }) => {
         </InputGroup>
       </Stack>
 
-      <Flex>
+      <Flex align='center'>
       <Badge
-    color={statusToggle == "pending" ? "complete" : "pending"}
-    onClick={(e) => setStatusToggle(e.target.value)}
+      height='fit-content'
+    onClick={(e) => setStatusToggle(statusToggle == "completed" ? "pending" : "completed")}
     bg="inherit"
     transition={"0.2s"}
     _hover={{
@@ -104,14 +97,15 @@ const EditItem = ({ itemData }) => {
     }}
     size="sm"
     >
-    {itemData.status == "pending" ? <FaToggleOff /> : <FaToggleOn />}
+    {statusToggle == "pending" ? <FaToggleOff /> : <FaToggleOn />}
     </Badge>
     <Badge
-    size="sm"
+    height='fit-content'
     opacity="0.8"
-    bg={itemData.status == "pending" ? "yellow.500" : "green.500"}
+    bg={statusToggle == "pending" ? "yellow.500" : "green.500"}
+    
     >
-    {itemData.status}
+    {statusToggle}
     </Badge>
       <Text>
         {new Date(itemData.createdAt).toLocaleDateString('en-US')}
