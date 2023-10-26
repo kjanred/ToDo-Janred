@@ -49,12 +49,12 @@ const TodoItem = ({itemData}) => {
             </Text>
 
             <Flex mt={3}>
-            <Text fontSize={"sm"}>
-              status:  <span className="listInfo">{ itemData.status }</span>
+            <Text fontSize={"sm"} textTransform='capitalize'>
+              Status:  <span className="listInfo">{ itemData.status }</span>
             </Text>
             <Spacer />
             <Text fontSize={"sm"}>
-              created:  <span className="listInfo">{new Date(itemData.createdAt).toLocaleDateString('en-US')}</span>
+             Created:  <span className="listInfo">{new Date(itemData.createdAt).toLocaleDateString('en-US')}</span>
             </Text>
             </Flex>
 

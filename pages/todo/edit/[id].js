@@ -72,20 +72,21 @@ const EditItem = ({ itemData }) => {
       <Heading size="xs"><Link href={`/todo/${encodeURIComponent(itemData.id)}`}><ArrowLeftIcon/> Exit Edit</Link></Heading>
 
       <Heading fontFamily={'"Century Gothic", sans-serif'} letterSpacing={'5px'} textTransform={'uppercase'} textAlign={'center'} fontWeight={'normal'}>Editing</Heading>
-      <Box p={5} mt={5} mb={12} boxShadow='dark-lg' bg='blackAlpha.200' borderRadius='5px' >
-      <Stack mb={5}>
+      <Box px={5} pt={5}  pb={2} mt={5} mb={12} boxShadow='dark-lg' bg='blackAlpha.200' borderRadius='5px' >
+      <Stack mb={10}>
         <InputGroup size='lg'>
-        <InputLeftAddon fontWeight={'bold'} children='Title:' />
-        <Input fontWeight={'bold'}  type="text" value={inputTitle} onChange={(e) => setInputTitle(e.target.value)} placeholder="Title" />
+        <InputLeftAddon borderColor='blackAlpha.300' fontWeight={'bold'} children='Title:' />
+        <Input borderColor='blackAlpha.300' bg='white' fontWeight={'bold'}  type="text" value={inputTitle} onChange={(e) => setInputTitle(e.target.value)} placeholder="Title" />
         </InputGroup>
-        <Divider my={1} borderWidth='2px' borderColor='black'/>
+        <Divider my={1} borderWidth='1px' borderColor='blackAlpha.500'/>
         <InputGroup>
-        <InputLeftAddon children='Desc:' />
-        <Input type="text" value={inputDescription} onChange={(e) => setInputDescription(e.target.value)} placeholder="Description" />
+        <InputLeftAddon borderColor='blackAlpha.300' children='Desc:' />
+        <Input borderColor='blackAlpha.300' bg='white' type="text" value={inputDescription} onChange={(e) => setInputDescription(e.target.value)} placeholder="Description" />
         </InputGroup>
       </Stack>
 
-      <Flex align='center'>
+      <Flex justifyContent='space-between' align='end'>
+        <Box pb='2px'>
       <Badge
       height='fit-content'
     onClick={(e) => setStatusToggle(statusToggle == "completed" ? "pending" : "completed")}
@@ -100,22 +101,25 @@ const EditItem = ({ itemData }) => {
     {statusToggle == "pending" ? <FaToggleOff /> : <FaToggleOn />}
     </Badge>
     <Badge
-    height='fit-content'
     opacity="0.8"
     bg={statusToggle == "pending" ? "yellow.500" : "green.500"}
     
     >
     {statusToggle}
     </Badge>
+    </Box>
       <Text>
-        {new Date(itemData.createdAt).toLocaleDateString('en-US')}
+        Created: {new Date(itemData.createdAt).toLocaleDateString('en-US')}
       </Text>
-      <Spacer />
+    <Box>
       <Text>
         {statusMsg}
       </Text>
       <Button onClick={() => sendData()} ml={2} bg="whiteAlpha.600" >Update</Button>
+      </Box>
       </Flex>
+
+      
 
       </Box>
       

@@ -96,13 +96,14 @@ body {
 }
 
 a:active, a:visited, a:link {
-  color: rgb(35, 99, 209);
+  color: rgb(60, 108, 192);
   text-decoration: none;
+  transition: .7s;
 }
 
 a:hover {
-  color: rgb(131, 169, 233);
-  text-decoration: underline;
+  text-shadow: 2px 2px 5px #808080;
+  transition: .7s;
 }
 
 @media (prefers-color-scheme: dark) {
