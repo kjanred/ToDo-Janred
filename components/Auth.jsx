@@ -41,7 +41,7 @@ return (
     <Box>
     {isLoggedIn && (
     <>
-    <Text color="green.500">{user.email}</Text>
+    <Text color="black.500">{user.email}</Text>
     <Link color="red.500" onClick={() => auth.signOut()}>
     Logout
     </Link>

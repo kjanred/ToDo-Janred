@@ -5,17 +5,16 @@ import { toggleTodoStatus } from "../../../api/todo";
 import {
   Heading,
   Badge,
-  InputGroup,
-  InputLeftAddon,
   Input,
+  Textarea,
   Button,
   Text,
   Box,
   Container,
   Stack,
   Flex,
-  Spacer,
   Divider,
+  Spacer,
   useToast
 } from "@chakra-ui/react";
 import Auth from '../../../components/Auth';
@@ -69,41 +68,44 @@ const EditItem = ({ itemData }) => {
   return (
     <Container maxW="7xl">
       <Auth />
-      <Heading size="xs"><Link href={`/todo/${encodeURIComponent(itemData.id)}`}><ArrowLeftIcon/> Exit Edit</Link></Heading>
-
-      <Heading fontFamily={'"Century Gothic", sans-serif'} letterSpacing={'5px'} textTransform={'uppercase'} textAlign={'center'} fontWeight={'normal'}>Editing</Heading>
+      <Flex justifyContent='space-between' align='center'>
+        <Link href={`/todo/${encodeURIComponent(itemData.id)}`}> <Text fontSize='sm' fontWeight='bold'><ArrowLeftIcon/> exit edit</Text></Link>
+        <Text fontSize='4xl' fontFamily={'"Century Gothic", sans-serif'} letterSpacing={'5px'} textTransform={'uppercase'} fontWeight={'normal'}>Editing</Text>
+        <Box hideBelow='md'>{/*Invisible Box for center positioning using flex on md and above*/}<Text fontSize='sm' fontWeight='bold' visibility='hidden'><ArrowLeftIcon/> exit edit</Text></Box>
+      </Flex>
+      
       <Box px={5} pt={5}  pb={2} mt={5} mb={12} boxShadow='dark-lg' bg='blackAlpha.200' borderRadius='5px' >
       <Stack mb={10}>
-        <InputGroup size='lg'>
-        <InputLeftAddon borderColor='blackAlpha.300' fontWeight={'bold'} children='Title:' />
-        <Input borderColor='blackAlpha.300' bg='white' fontWeight={'bold'}  type="text" value={inputTitle} onChange={(e) => setInputTitle(e.target.value)} placeholder="Title" />
-        </InputGroup>
+        
+      
+        <Input size='lg' borderColor='blackAlpha.300' bg='white' fontWeight={'bold'}  type="text" value={inputTitle} onChange={(e) => setInputTitle(e.target.value)} placeholder="Title" />
+        
         <Divider my={1} borderWidth='1px' borderColor='blackAlpha.500'/>
-        <InputGroup>
-        <InputLeftAddon borderColor='blackAlpha.300' children='Desc:' />
-        <Input borderColor='blackAlpha.300' bg='white' type="text" value={inputDescription} onChange={(e) => setInputDescription(e.target.value)} placeholder="Description" />
-        </InputGroup>
+        
+        <Textarea borderColor='blackAlpha.300' bg='white' type="text" value={inputDescription} onChange={(e) => setInputDescription(e.target.value)} placeholder="Description" />
+       
       </Stack>
 
       <Flex justifyContent='space-between' align='end'>
-        <Box pb='2px'>
-      <Badge
+        <Box pb='2px' width='115px'>
+      <Badge pe={2}
       height='fit-content'
-    onClick={(e) => setStatusToggle(statusToggle == "completed" ? "pending" : "completed")}
+    onClick={() => setStatusToggle(statusToggle == "completed" ? "pending" : "completed")}
     bg="inherit"
     transition={"0.2s"}
+    transform='scale(1.2)'
     _hover={{
     bg: "inherit",
-    transform: "scale(1.2)",
+    transform: "scale(1.5)",
     }}
-    size="sm"
+
     >
     {statusToggle == "pending" ? <FaToggleOff /> : <FaToggleOn />}
     </Badge>
     <Badge
     opacity="0.8"
     bg={statusToggle == "pending" ? "yellow.500" : "green.500"}
-    
+    fontSize='small'
     >
     {statusToggle}
     </Badge>
@@ -111,12 +113,12 @@ const EditItem = ({ itemData }) => {
       <Text>
         Created: {new Date(itemData.createdAt).toLocaleDateString('en-US')}
       </Text>
-    <Box>
+    <Flex align='center'>
       <Text>
         {statusMsg}
       </Text>
       <Button onClick={() => sendData()} ml={2} bg="whiteAlpha.600" >Update</Button>
-      </Box>
+      </Flex>
       </Flex>
 
       
