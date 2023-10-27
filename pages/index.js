@@ -20,7 +20,7 @@ import EventList from "../components/EventList";
 import ContactList from "../components/ContactList";
 import AddTodo from "@/components/AddTodo";
 import AddEvent from "@/components/AddEvent";
-import AddContact from "@/components/Addcontact";
+import AddContact from "@/components/AddContact";
 
 
 export default function Home() {
