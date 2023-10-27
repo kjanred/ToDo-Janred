@@ -39,7 +39,7 @@ const ContactItem = ({itemData}) => {
             { itemData.name } 
         </Heading>
             <Spacer/>
-        <Box><Link href={`/event/edit/${encodeURIComponent(itemData.id)}`}><Button size={{base: 'sm', md: 'md' }} mb={2} bg="whiteAlpha.600" leftIcon={<EditIcon  />} >Edit</Button></Link></Box>
+        <Box><Link href={`/contact/edit/${encodeURIComponent(itemData.id)}`}><Button size={{base: 'sm', md: 'md' }} mb={2} bg="whiteAlpha.600" leftIcon={<EditIcon  />} >Edit</Button></Link></Box>
     </Flex>
     <Divider my={1} borderWidth='2px' borderColor='black'/>
             <Text fontSize={"md"}>

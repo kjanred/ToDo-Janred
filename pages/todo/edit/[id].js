@@ -1,9 +1,7 @@
 import React, { useState } from 'react';
 import { ArrowLeftIcon } from '@chakra-ui/icons'
 import Link from "next/link";
-import { toggleTodoStatus } from "../../../api/todo";
 import {
-  Heading,
   Badge,
   Input,
   Textarea,
@@ -14,8 +12,6 @@ import {
   Stack,
   Flex,
   Divider,
-  Spacer,
-  Hide,
   useToast
 } from "@chakra-ui/react";
 import Auth from '../../../components/Auth';
@@ -27,15 +23,14 @@ import {
   updateDoc
 } from "firebase/firestore";
 import { db } from "../../../firebase";
-import { FaStackExchange } from 'react-icons/fa';
 
 // define the jsx component to show just one single to do in our ui
-const EditItem = ({ itemData }) => {
+const EditTodoItem = ({ itemData }) => {
   const [inputTitle, setInputTitle] = useState(itemData.title);
   const [inputDescription, setInputDescription] = useState(itemData.description);
   const [statusToggle, setStatusToggle] = useState(itemData.status);
   const [statusMsg, setStatusMsg] = useState('');
-  const toast = useToast();
+  
   // enforce user login
   const { user } = useAuth() || {};
   if (!user) {
@@ -158,4 +153,4 @@ export async function getServerSideProps(context) {
 }
 
 // export the component
-export default EditItem;
+export default EditTodoItem;
