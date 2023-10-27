@@ -12,7 +12,6 @@ import {
   Stack,
   Flex,
   Divider,
-
 } from "@chakra-ui/react";
 import Auth from '../../../components/Auth';
 import useAuth from "../../../hooks/useAuth";
@@ -31,6 +30,7 @@ const EditEventItem = ({ itemData }) => {
   const [statusMsg, setStatusMsg] = useState('');
   // enforce user login
   const { user } = useAuth() || {};
+
   if (!user) {
     return;
   }
@@ -60,6 +60,7 @@ const EditEventItem = ({ itemData }) => {
     ).then(
       docRef => {
         setStatusMsg("Updated!");
+        console.log(itemData);
       }
     ).catch(
       error => {
@@ -78,11 +79,8 @@ const EditEventItem = ({ itemData }) => {
         <Text fontSize='4xl' fontFamily={'"Century Gothic", sans-serif'} letterSpacing={'5px'} textTransform={'uppercase'} fontWeight={'normal'}>Editing</Text>
         <Box hideBelow='md'>{/*Invisible Box for center positioning using flex on md and above*/}<Text fontSize='sm' fontWeight='bold' visibility='hidden'><ArrowLeftIcon/> exit edit</Text></Box>
       </Flex>
-      
       <Box px={5} pt={5}  pb={2} mt={5} mb={12} boxShadow='dark-lg' bg='blackAlpha.200' borderRadius='5px' >
       <Stack mb={10}>
-        
-      
         <Input size='lg' borderColor='blackAlpha.300' bg='white' fontWeight={'bold'}  type="text" value={inputTitle} onChange={(e) => setInputTitle(e.target.value)} placeholder="Title" />
         
         <Divider my={1} borderWidth='1px' borderColor='blackAlpha.500'/>
@@ -98,6 +96,7 @@ const EditEventItem = ({ itemData }) => {
       <Flex justifyContent='space-between' align='end'>
     <Box pb='2px' width={{base: '73px', md: '115px' }}>
     <Badge
+    className='cursor'
     onClick={()=>handleUrgencyToggle()}
     opacity="0.8"
     bg={urgencyToggle == "notUrgent" ? "green.500" : urgencyToggle == "urgent" ? "yellow.500" : "red.500"}

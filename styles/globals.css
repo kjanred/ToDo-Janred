@@ -115,3 +115,14 @@ a:hover {
 .listInfo {
   font-weight: bold;
 }
+
+.cursor {
+  cursor: pointer;
+}
+
+
+a.homeLink:link, a.homeLink:hover, a.homeLink:active, a.homeLink:visited {
+  color: black;
+  text-shadow: none;
+  text-decoration: none;
+}

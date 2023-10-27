@@ -28,10 +28,11 @@ const EventItem = ({itemData}) => {
     return (
         <Container maxW="7xl">
 <Auth />
-<Heading size="xs"><Link href="../"> <ArrowLeftIcon /> back to lists</Link></Heading>
-
-
-<Heading fontFamily={'"Century Gothic", sans-serif'} letterSpacing={'5px'} textTransform={'uppercase'} textAlign={'center'} fontWeight={'normal'}>Event</Heading>
+<Flex justifyContent='space-between' align='baseline'>
+        <Link href={`../`}> <Text fontSize='sm' fontWeight='bold'><ArrowLeftIcon/> back to lists</Text></Link>
+        <Text fontSize='4xl' fontFamily={'"Century Gothic", sans-serif'} letterSpacing={'5px'} textTransform={'uppercase'} fontWeight={'normal'}>Event</Text>
+        <Box hideBelow='md'>{/*Invisible Box for center positioning using flex on md and above*/}<Text fontSize='sm' fontWeight='bold' visibility='hidden'><ArrowLeftIcon/> back to lists</Text></Box>
+      </Flex>
 <Box p={5} mt={5} mb={12} boxShadow='dark-lg' bg='blackAlpha.200' borderRadius='5px' >
     <Flex>        
         <Heading lineHeight='-1' fontSize={{base: '2xl', md: '3xl' }} width='lg'>

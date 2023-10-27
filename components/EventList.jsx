@@ -85,6 +85,7 @@ import {
     </Badge>
     
     <Badge
+    className="cursor"
     float="right"
     opacity="0.8"
     bg={event.urgency == "notUrgent" ? "green.500" : event.urgency == "urgent" ? "yellow.500" : "red.500"}

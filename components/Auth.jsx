@@ -32,7 +32,9 @@ const credential = GoogleAuthProvider.credentialFromError(error);
 return (
 <Box mt={5} display={{base: "block", md: "flex"}} alignItems="center" justifyContent="space-between">
     <Box>
+    <Link className='homeLink'>
      <Heading size='2xl' fontFamily={'"Century Gothic", sans-serif'} letterSpacing={'5px'} textTransform={'uppercase'} textAlign={'center'} fontWeight={'normal'} textShadow='3px 3px 5px #808080' m='6'>EasyNotes</Heading>
+     </Link>
     </Box>
     <SimpleGrid columns={2} hideFrom='md'>
     <Box><Button onClick={() => toggleColorMode()}>

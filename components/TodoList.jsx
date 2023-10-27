@@ -79,6 +79,7 @@ import {
     <FaTrash />
     </Badge>
     <Badge
+    className="cursor"
     color={todo.status == "pending" ? "gray.500" : "green.500"}
     bg="inherit"
     transition={"0.2s"}
